@@ -1,0 +1,14 @@
+kind: ZarfPackageConfig
+metadata:
+  name: cdp-core
+  description: "Capability Development Platform (CDP) Core"
+  version: "###ZARF_PKG_TMPL_PACKAGE_VERSION###"
+  architecture: amd64
+  
+components:
+  - name: cdp-core
+    required: true
+    actions:
+      onCreate:
+        after:
+          - cmd: echo "Hello World"
