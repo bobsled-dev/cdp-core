@@ -1,0 +1,17 @@
+neuvector:
+  enabled: true
+  ingress:
+    gateway: "admin"
+  values:
+    containerd:
+      enabled: true
+    monitor:
+      install: true
+    controller:
+      secret:
+        data:
+          sysinitcfg.yaml:
+            always_reload: true
+            scan_config:
+              auto_scan: true
+            no_telemetry_report: true
