@@ -4,11 +4,42 @@ metadata:
   description: "Capability Development Platform (CDP) Core"
   version: "###ZARF_PKG_TMPL_PACKAGE_VERSION###"
   architecture: amd64
-  
+
 components:
+  - name: metallb
+    required: true
+    charts:
+      - name: metallb 
+        version: 0.13.10
+        namespace: metallb-system
+        url: https://metallb.github.io/metallb
+    images:
+      - quay.io/frrouting/frr:8.4.2
+      - quay.io/metallb/controller:v0.13.10
+      - quay.io/metallb/speaker:v0.13.10
+    manifests:
+      - name: metallb-config
+        files:
+          - metallb/ipaddresspool.yaml
+          - metallb/L2advertisement.yaml
+        namespace: metallb-system
+  - name: cdp-core-certs
+    required: true
+    import:
+      path: ./dubbd/k3s
+      name: load-certs
+  - name: cdp-core-preflight
+    required: true
+    import:
+      path: ./dubbd/k3s
+      name: preflight
+  - name: cdp-core-download-flux
+    required: true
+    import:
+      path: ./dubbd/k3s
+      name: download-flux
   - name: cdp-core
     required: true
-    actions:
-      onCreate:
-        after:
-          - cmd: echo "Hello World"
+    import:
+      path: ./dubbd/k3s
+      name: bigbang

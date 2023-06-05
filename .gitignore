@@ -1,1 +1,3 @@
 zarf-package*.tar.zst
+zarf-sbom
+zarf-init-*.tar.zst

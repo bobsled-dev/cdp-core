@@ -1,10 +1,35 @@
 VERSION ?= $(if $(shell git describe --tags),$(shell git describe --tags),"UnknownVersion")
 
-build:
-	zarf package create --set PACKAGE_VERSION=$(VERSION) --confirm
+.PHONY: help h
+h: help
+help: ## Display this help information
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) \
+	  | sort | awk 'BEGIN {FS = ":.*?## "}; \
+	  {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-clean:
-	rm -rf zarf-package*.tar.zst
+download-init: ## Download the Zarf Init package
+	curl -OL https://github.com/defenseunicorns/zarf/releases/download/v0.28.0/zarf-init-amd64-v0.28.0.tar.zst 
 
-release:
+build: ## Build the CDP Core Package
+	zarf -a amd64 package create --set PACKAGE_VERSION=$(VERSION) --confirm -l debug
+
+clean: ## Clean up the build artifacts
+	rm -rf zarf-package*.tar.zst zarf-init*.tar.zst zarf-sbom
+
+release: ## Create a release of the CDP Core Package
 	gh release create --generate-notes
+
+zarf-init: download-init ## Install the Zarf Init package on a cluster
+	zarf -a amd64 init --components git-server --confirm
+
+zarf-init-remove: ## Remove the Zarf Init package from a cluster
+	zarf -a amd64 package remove init --confirm
+
+zarf-pkg-deploy: ## Install the CDP Core Package on a cluster
+	zarf -a amd64 package deploy --confirm zarf-package-cdp-core-amd64*.tar.zst
+
+zarf-pkg-remove: ## Remove the CDP Core Package from a cluster
+	zarf -a amd64 package remove cdp-core --confirm
+
+cdp-clean: ## Remove files created by cdp-core package, after a failed deployment
+	rm -rf run tmp bigbang.dev.cert bigbang.dev.key on_failure.sh
