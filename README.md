@@ -1,9 +1,17 @@
 # cdp-core
 Defense Unicorns Big Bang Distro configured for target environment's.
 
-
 ## Quick Start
 
+### Deploy CDP Core
+(requires internet access)
+
+```
+zarf init --components git-server
+zarf -a amd64 package deploy oci://ghcr.io/defenseunicorns/cdp-core:vx.y.z --confirm
+```
+
+### Build and Deploy local version
 Build the Package: 
 ```
 make build
