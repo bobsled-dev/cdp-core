@@ -11,7 +11,7 @@ download-init: ## Download the Zarf Init package
 	curl -OL https://github.com/defenseunicorns/zarf/releases/download/v0.28.0/zarf-init-amd64-v0.28.0.tar.zst 
 
 build: ## Build the CDP Core Package
-	zarf -a amd64 package create --set PACKAGE_VERSION=$(VERSION) --confirm -l debug
+	zarf -a amd64 package create --set PACKAGE_VERSION=$(VERSION) --confirm
 
 clean: ## Clean up the build artifacts
 	rm -rf zarf-package*.tar.zst zarf-init*.tar.zst zarf-sbom

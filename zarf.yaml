@@ -23,23 +23,22 @@ components:
           - metallb/ipaddresspool.yaml
           - metallb/L2advertisement.yaml
         namespace: metallb-system
-  - name: cdp-core-certs
+  - name: load-certs
     required: true
     import:
-      path: ./dubbd/k3s
-      name: load-certs
-  - name: cdp-core-preflight
+      url: oci://ghcr.io/defenseunicorns/packages/dubbd-k3d:0.3.0-skeleton
+  - name: preflight
     required: true
     import:
-      path: ./dubbd/k3s
-      name: preflight
-  - name: cdp-core-download-flux
+      url: oci://ghcr.io/defenseunicorns/packages/dubbd-k3d:0.3.0-skeleton
+  - name: download-flux
     required: true
     import:
-      path: ./dubbd/k3s
-      name: download-flux
-  - name: cdp-core
+      url: oci://ghcr.io/defenseunicorns/packages/dubbd-k3d:0.3.0-skeleton
+  - name: bigbang
     required: true
     import:
-      path: ./dubbd/k3s
-      name: bigbang
+      url: oci://ghcr.io/defenseunicorns/packages/dubbd-k3d:0.3.0-skeleton
+    extensions:
+      bigbang:
+        version: "###ZARF_PKG_VAR_BIGBANG_VERSION###"
