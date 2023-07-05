@@ -22,7 +22,7 @@ jobs:
     - name: Install Zarf
       uses: defenseunicorns/setup-zarf@main
       with:
-        version: v0.27.0
+        version: v0.28.0
     - name: Build Package
       run: make build
     - name: Login to GHCR
