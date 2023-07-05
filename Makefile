@@ -32,4 +32,4 @@ zarf-pkg-remove: ## Remove the CDP Core Package from a cluster
 	zarf -a amd64 package remove cdp-core --confirm
 
 cdp-clean: ## Remove files created by cdp-core package, after a failed deployment
-	rm -rf run tmp bigbang.dev.cert bigbang.dev.key on_failure.sh
+	rm -rf run tmp bigbang.dev.cert bigbang.dev.key on_failure.sh terraform.tfstate
