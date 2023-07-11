@@ -1,4 +1,5 @@
 VERSION ?= $(if $(shell git describe --tags),$(shell git describe --tags),"UnknownVersion")
+ZARF_VERSION = v0.28.1
 
 .PHONY: help h
 h: help
@@ -8,7 +9,7 @@ help: ## Display this help information
 	  {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 download-init: ## Download the Zarf Init package
-	curl -OL https://github.com/defenseunicorns/zarf/releases/download/v0.28.0/zarf-init-amd64-v0.28.0.tar.zst 
+	curl -OL https://github.com/defenseunicorns/zarf/releases/download/$(ZARF_VERSION)/zarf-init-amd64-$(ZARF_VERSION).tar.zst 
 
 build: ## Build the CDP Core Package
 	zarf -a amd64 package create --set PACKAGE_VERSION=$(VERSION) --confirm
