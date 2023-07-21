@@ -1,6 +1,10 @@
 name: Publish Package
 
 on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
   release:
     types: [ "published" ]
   workflow_dispatch:
@@ -36,4 +40,5 @@ jobs:
     - name: Build Package
       run: make build
     - name: Publish Package
+      if: ${{ github.event_name == 'release' && github.event.action == 'published' }}
       run: zarf package publish zarf-package-*.tar.zst oci://ghcr.io/bobsled-dev/packages 
