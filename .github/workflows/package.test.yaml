@@ -1,8 +1,8 @@
-name: Publish Package
+name: Test Package
 
 on:
-  release:
-    types: [ "published" ]
+  push:
+    branches: [ "main" ]
   workflow_dispatch:
 
 permissions:
@@ -33,7 +33,3 @@ jobs:
       uses: defenseunicorns/setup-zarf@main
       with:
         version: v0.28.1
-    - name: Build Package
-      run: make build
-    - name: Publish Package
-      run: zarf package publish zarf-package-*.tar.zst oci://ghcr.io/bobsled-dev/packages 
