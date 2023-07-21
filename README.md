@@ -36,4 +36,3 @@ Remove the Package:
 make zarf-pkg-remove
 make zarf-init-remove
 ```
-
