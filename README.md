@@ -14,7 +14,7 @@ Defense Unicorns Big Bang Distro configured for target environment's.
 
 ```
 zarf init --components git-server
-zarf -a amd64 package deploy oci://ghcr.io/bobsled-dev/packages/cdp-core:vx.y.z --confirm
+zarf -a amd64 package deploy oci://ghcr.io/bobsled-dev/packages/cdp-core:vx.y.z-amd64 --confirm
 ```
 
 ### Build and Deploy local version
