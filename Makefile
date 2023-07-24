@@ -1,5 +1,5 @@
 VERSION ?= $(if $(shell git describe --tags),$(shell git describe --tags),"UnknownVersion")
-ZARF_VERSION = v0.28.1
+ZARF_VERSION = v0.28.2
 ZARF_CMD = zarf
 
 .PHONY: help h
