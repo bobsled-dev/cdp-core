@@ -2,7 +2,7 @@
 
 <!-- DUBBD v0.3.0 and Zarf v0.28.0 are not latest, so badges are yellow-->
 [![Latest Release](https://img.shields.io/github/v/release/bobsled-dev/cdp-core)](https://github.com/bobsled-dev/cdp-core/releases)
-[![DUBBD Release](https://img.shields.io/github/v/release/defenseunicorns/uds-package-dubbd?filter=v0.4.1&label=using%20DUBBD)](https://github.com/defenseunicorns/uds-package-dubbd/releases/tag/v0.4.1)
+[![DUBBD Release](https://img.shields.io/github/v/release/defenseunicorns/uds-package-dubbd?filter=v0.4.2&label=using%20DUBBD)](https://github.com/defenseunicorns/uds-package-dubbd/releases/tag/v0.4.2)
 [![Zarf Release](https://img.shields.io/github/v/release/defenseunicorns/zarf?filter=v0.28.2&label=using%20Zarf)](https://github.com/defenseunicorns/zarf/releases/tag/v0.28.2)
 
 Defense Unicorns Big Bang Distro configured for target environment's.
