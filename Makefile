@@ -15,8 +15,8 @@ download-init: ## Download the Zarf Init package
 build: ## Build the CDP Core Package
 	$(ZARF_CMD) -a amd64 package create --set PACKAGE_VERSION=$(VERSION) --confirm
 
-clean: ## Clean up the build artifacts
-	rm -rf zarf-package*.tar.zst zarf-init*.tar.zst zarf-sbom
+clean: ## Clean up artifacts
+	rm -rf zarf-package*.tar.zst zarf-init*.tar.zst zarf-sbom zarf_v*_amd64
 
 release: ## Create a release of the CDP Core Package
 	gh release create --generate-notes
@@ -35,3 +35,9 @@ zarf-pkg-remove: ## Remove the CDP Core Package from a cluster
 
 cdp-clean: ## Remove files created by cdp-core package, after a failed deployment
 	rm -rf run tmp bigbang.dev.cert bigbang.dev.key on_failure.sh terraform.tfstate
+
+get-zarf-linux: ## Download the Zarf Binary used in the current release
+	curl -0L https://github.com/defenseunicorns/zarf/releases/download/$(ZARF_VERSION)/zarf_$(ZARF_VERSION)_Linux_amd64 --output zarf_$(ZARF_VERSION)_Linux_amd64
+
+get-zarf-mac: ## Download the Zarf Binary used in the current release
+	curl -0L https://github.com/defenseunicorns/zarf/releases/download/$(ZARF_VERSION)/zarf_$(ZARF_VERSION)_Darwin_amd64 --output zarf_$(ZARF_VERSION)_Darwin_amd64
