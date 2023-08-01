@@ -16,7 +16,7 @@ build: ## Build the CDP Core Package
 	$(ZARF_CMD) -a amd64 package create --set PACKAGE_VERSION=$(VERSION) --confirm
 
 clean: ## Clean up artifacts
-	rm -rf zarf-package*.tar.zst zarf-init*.tar.zst zarf-sbom zarf_v*_amd64
+	rm -rf zarf-package*.tar.zst zarf-init*.tar.zst zarf-sbom zarf_v*_amd64 cdp-core-*.tar.zst
 
 release: ## Create a release of the CDP Core Package
 	gh release create --generate-notes
@@ -41,3 +41,10 @@ get-zarf-linux: ## Download the Zarf Binary used in the current release
 
 get-zarf-mac: ## Download the Zarf Binary used in the current release
 	curl -0L https://github.com/defenseunicorns/zarf/releases/download/$(ZARF_VERSION)/zarf_$(ZARF_VERSION)_Darwin_amd64 --output zarf_$(ZARF_VERSION)_Darwin_amd64
+
+package-all-linux: ## Package release and dependencies
+	tar -cf cdp-core-$(VERSION)-all.tar zarf-init-*.tar.zst zarf-package-cdp-core-*.tar.zst zarf_*_Linux_amd64
+	zstd cdp-core-$(VERSION)-all.tar
+
+upload-to-s3: ## Upload a package to S3
+	aws s3 cp cdp-core-$(VERSION)-all.tar.zst s3://cdp-core/cdp-core-$(VERSION)-all.tar.zst 
