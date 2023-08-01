@@ -48,8 +48,7 @@ jobs:
     - name: Build Package
       run: make build
     - name: Save CDP Core package
-      # TODO - not sure how else to test without making it a release
-      # if: ${{ github.event_name == 'release' && github.event.action == 'published' }}
+      if: ${{ github.event_name == 'release' && github.event.action == 'published' }}
       uses: actions/upload-artifact@v3
       with:
         name: zarf-package
@@ -58,8 +57,7 @@ jobs:
   publish:
     needs: build
     runs-on: ubuntu-latest
-    # TODO - not sure how else to test without making it a release
-    # if: ${{ github.event_name == 'release' && github.event.action == 'published' }}
+    if: ${{ github.event_name == 'release' && github.event.action == 'published' }}
     
     steps:
     - uses: actions/checkout@v3
