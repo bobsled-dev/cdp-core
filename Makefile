@@ -47,4 +47,4 @@ package-all-linux: ## Package release and dependencies
 	zstd cdp-core-$(VERSION)-all.tar
 
 upload-to-s3: ## Upload a package to S3
-	aws s3 cp cdp-core-$(VERSION)-all.tar.zst s3://cdp-core/cdp-core-$(VERSION)-all.tar.zst 
+	aws s3 cp cdp-core-$(VERSION)-all.tar.zst s3://cdp-core/

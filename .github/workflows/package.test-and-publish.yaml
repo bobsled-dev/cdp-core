@@ -75,5 +75,18 @@ jobs:
     - uses: actions/download-artifact@v3
       with: 
         name: zarf-package
-    - name: Publish Package
+    - name: Publish GHCR Package 
       run: zarf package publish zarf-package-*.tar.zst oci://ghcr.io/bobsled-dev/packages 
+    - name: Bundle Package
+      run: |
+        make get-zarf-linux
+        make download-init
+        make package-all-linux
+    - name: Upload to S3
+      uses: prewk/s3-cp-action@v2
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws_region: 'us-east-2'
+        source: 'cdp-core-*-all.tar.zst'
+        dest: 's3://cdp-core/'
