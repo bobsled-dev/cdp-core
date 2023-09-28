@@ -12,29 +12,16 @@ Defense Unicorns Big Bang Distro configured for target environment's.
 ## Quick Start
 
 ### Deploy CDP Core
-(requires internet access)
 
 ```
+# With Internet
 zarf init --components git-server
 zarf -a amd64 package deploy oci://ghcr.io/bobsled-dev/packages/cdp-core:vx.y.z-amd64 --confirm
-```
 
-### Build and Deploy local version
-Build the Package: 
+# Without Internet
+# Download Release artifacts (zarf, zarf-init-amd64-*.tar.zst, oci://ghcr.io/bobsled-dev/packages/cdp-core:v0.0.3-amd64)
+# Move to target system
+zarf init --components git-server --confirm # zarf-init-* should be in same directory
+zarf package deploy zarf-package-cdp-core-amd64-vx.y.z.tar.zst --confirm
 ```
-make build
-```
-
-Deploy the Package:
-```
-# Pre-requisites: k3s cluster (`--disable=traefik --disable=servicelb`)
-make download-init # optional - zarf init will download if a network connection exists
-make zarf-init
-make zarf-pkg-deploy
-```
-
-Remove the Package:
-```
-make zarf-pkg-remove
-make zarf-init-remove
 ```
