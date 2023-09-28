@@ -6,39 +6,57 @@ metadata:
   architecture: amd64
 
 components:
-  - name: metallb
-    required: true
-    charts:
-      - name: metallb 
-        version: 0.13.10
-        namespace: metallb-system
-        url: https://metallb.github.io/metallb
-    images:
-      - quay.io/frrouting/frr:8.4.2
-      - quay.io/metallb/controller:v0.13.10
-      - quay.io/metallb/speaker:v0.13.10
-    manifests:
-      - name: metallb-config
-        files:
-          - metallb/ipaddresspool.yaml
-          - metallb/L2advertisement.yaml
-        namespace: metallb-system
-  - name: load-certs
+  # ROOK-CEPH
+  - name: rook-ceph-operator
     required: true
     import:
-      url: oci://ghcr.io/defenseunicorns/packages/dubbd-k3d:0.4.2-skeleton
+      url: oci://ghcr.io/defenseunicorns/packages/rook-ceph:0.0.2-skeleton
+  - name: rook-ceph-cluster
+    required: true
+    import:
+      url: oci://ghcr.io/defenseunicorns/packages/rook-ceph:0.0.2-skeleton
+  # METALLB
+  - name: metallb
+    required: true
+    import:
+      url: oci://ghcr.io/defenseunicorns/packages/metallb:0.0.2-skeleton
+  # DUBBD
+  - name: set-zarf-vars
+    required: true
+    import:
+      url: oci://ghcr.io/defenseunicorns/packages/dubbd-rke2:0.10.0-skeleton
   - name: preflight
     required: true
     import:
-      url: oci://ghcr.io/defenseunicorns/packages/dubbd-k3d:0.4.2-skeleton
+      url: oci://ghcr.io/defenseunicorns/packages/dubbd-rke2:0.10.0-skeleton
+  - name: load-certs
+    required: true
+    import:
+      url: oci://ghcr.io/defenseunicorns/packages/dubbd-rke2:0.10.0-skeleton
+  - name: generate-credentials
+    required: true
+    import:
+      url: oci://ghcr.io/defenseunicorns/packages/dubbd-rke2:0.10.0-skeleton
   - name: download-flux
     required: true
     import:
-      url: oci://ghcr.io/defenseunicorns/packages/dubbd-k3d:0.4.2-skeleton
+      url: oci://ghcr.io/defenseunicorns/packages/dubbd-rke2:0.10.0-skeleton
+  - name: storage-class
+    required: true
+    import:
+      url: oci://ghcr.io/defenseunicorns/packages/dubbd-rke2:0.10.0-skeleton
+  - name: dubbd-pre-upgrade
+    required: true
+    import:
+      url: oci://ghcr.io/defenseunicorns/packages/dubbd-rke2:0.10.0-skeleton
   - name: bigbang
     required: true
     import:
-      url: oci://ghcr.io/defenseunicorns/packages/dubbd-k3d:0.4.2-skeleton
+      url: oci://ghcr.io/defenseunicorns/packages/dubbd-rke2:0.10.0-skeleton
     extensions:
       bigbang:
         version: "###ZARF_PKG_VAR_BIGBANG_VERSION###"
+  - name: dubbd-post-upgrade
+    required: true
+    import:
+      url: oci://ghcr.io/defenseunicorns/packages/dubbd-rke2:0.10.0-skeleton
