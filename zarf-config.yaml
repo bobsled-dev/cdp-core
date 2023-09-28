@@ -9,9 +9,9 @@ package:
   deploy:
     set:
       # DUBBD
-      domain: agreene.dev
-      key_file: agreene.dev.key
-      cert_file: agreene.dev.cert
+      domain: bigbang.dev
+      key_file: bigbang.dev.key
+      cert_file: bigbang.dev.cert
       host_path: "/var/lib/rancher/k3s/storage/*"
       # METALLB
-      ip_address_pool: 23.0.0.60-23.0.0.61
+      ip_address_pool: ""
