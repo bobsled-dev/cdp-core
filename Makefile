@@ -1,5 +1,5 @@
 VERSION ?= $(if $(shell git describe --tags),$(shell git describe --tags),"UnknownVersion")
-ZARF_VERSION = v0.28.2
+ZARF_VERSION = v0.29.2
 ZARF_CMD = zarf
 
 .PHONY: help h
@@ -35,3 +35,7 @@ zarf-pkg-remove: ## Remove the CDP Core Package from a cluster
 
 cdp-clean: ## Remove files created by cdp-core package, after a failed deployment
 	rm -rf run tmp bigbang.dev.cert bigbang.dev.key on_failure.sh terraform.tfstate
+
+
+
+TODO: Package up zarf things

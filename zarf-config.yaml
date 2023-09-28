@@ -4,11 +4,14 @@ package:
   create: 
     max_package_size: "1000000000"
     set:
-      bigbang_version: "2.5.0"
-      flux_version: "0.41.2"
+      bigbang_version: "2.11.1"
+      flux_version: "2.0.1"
   deploy:
     set:
+      # DUBBD
       domain: agreene.dev
       key_file: agreene.dev.key
       cert_file: agreene.dev.cert
       host_path: "/var/lib/rancher/k3s/storage/*"
+      # METALLB
+      ip_address_pool: 23.0.0.60-23.0.0.61
